@@ -9,9 +9,8 @@ import os
 
 
 
-## with open(sys.argv[1]) as json_data:
-##    inputs = json.load(json_data)
-##
+##with open(sys.argv[1]) as json_data:
+## inputs = json.load(json_data)
 inputs = json.load(sys.stdin)
 
 outputs = {}
@@ -27,12 +26,7 @@ input_asciistr=inputs["problem1"]
 input_bytes=input_asciistr.encode()
 input_asciistr_ln=len(input_bytes)
 
-input_OTP=secrets.token_hex(input_asciistr_ln).encode()
-
-print(input_asciistr)
-print(input_asciistr_ln)
-print(input_OTP)
-print(len(input_OTP))
+input_OTP=secrets.token_bytes(input_asciistr_ln)
 
 
 input_cipher =xor_bytes(input_bytes,input_OTP)
@@ -41,9 +35,10 @@ input_cipher =xor_bytes(input_bytes,input_OTP)
 print(input_cipher.hex())
 
 outputs["problem1"] = {
-    "pad": input_OTP,
+    "pad": input_OTP.hex(),
     "ciphertext": input_cipher.hex(),
 }
+
 
 # Output
 #
