@@ -38,12 +38,7 @@ outputs["problem1"] = {
 input_prblm2=inputs["problem2"]
 input_padhex=input_prblm2["pad"]
 input_cipherhex=input_prblm2["ciphertext"]
-
-print(input_padhex,input_cipherhex)
 input_plantext =xor_bytes(bytes.fromhex(input_padhex),bytes.fromhex(input_cipherhex))
-
-print(input_plantext.decode())
-
 
 outputs["problem2"] =input_plantext.decode()
 
