@@ -32,8 +32,6 @@ input_OTP=secrets.token_bytes(input_asciistr_ln)
 input_cipher =xor_bytes(input_bytes,input_OTP)
 
 
-print(input_cipher.hex())
-
 outputs["problem1"] = {
     "pad": input_OTP.hex(),
     "ciphertext": input_cipher.hex(),
