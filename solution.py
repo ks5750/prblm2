@@ -9,9 +9,9 @@ import os
 
 
 
-##with open(sys.argv[1]) as json_data:
-## inputs = json.load(json_data)
-inputs = json.load(sys.stdin)
+with open(sys.argv[1]) as json_data:
+    inputs = json.load(json_data)
+## inputs = json.load(sys.stdin)
 
 outputs = {}
 def xor_bytes(a, b):
@@ -43,6 +43,17 @@ input_plantextDecoded=input_plantext.decode()
 
 outputs["problem2"] =input_plantextDecoded
 
+# Problem 3
+
+input_prblm3=inputs["problem3"]
+
+tempword="the".encode().hex()
+
+input_xor=xor_bytes(bytes.fromhex(input_prblm3[0]),bytes.fromhex(input_prblm3[1]))
+
+print(input_prblm3[0])
+print(input_prblm3[1])
+print(input_xor)
 
 
 # Output
