@@ -1,6 +1,7 @@
 #! /usr/bin/env python3
-
+import nacl.secret
 from nacl.secret import SecretBox
+from nacl.utils import random
 from nacl.exceptions import CryptoError
 import sys
 import json
@@ -8,10 +9,10 @@ import secrets
 import os
 
 
-
-with open(sys.argv[1]) as json_data:
-    inputs = json.load(json_data)
-## inputs = json.load(sys.stdin)
+#
+# with open(sys.argv[1]) as json_data:
+#     inputs = json.load(json_data)
+inputs = json.load(sys.stdin)
 
 outputs = {}
 def xor_bytes(a, b):
@@ -20,6 +21,11 @@ def xor_bytes(a, b):
     for i in range(len(a)):
         output[i] = a[i] ^ b[i]
     return output
+
+def get_nonce():
+    ct=nacl.utils.random(24)
+    return ct
+
 
 # Problem 1
 input_asciistr=inputs["problem1"]
@@ -33,7 +39,7 @@ outputs["problem1"] = {
     "ciphertext": input_cipher.hex(),
 }
 
-# Problem 2
+# Problem 2kl
 
 input_prblm2=inputs["problem2"]
 input_padhex=input_prblm2["pad"]
@@ -44,16 +50,40 @@ input_plantextDecoded=input_plantext.decode()
 outputs["problem2"] =input_plantextDecoded
 
 # Problem 3
+#
+# input_prblm3=inputs["problem3"]
+#
+# tempword="the".encode().hex()
+#
+# input_xor=xor_bytes(bytes.fromhex(input_prblm3[0]),bytes.fromhex(input_prblm3[1]))
+#
+# print(input_prblm3[0])
+# print(input_prblm3[1])
+# print(input_xor)
 
-input_prblm3=inputs["problem3"]
 
-tempword="the".encode().hex()
 
-input_xor=xor_bytes(bytes.fromhex(input_prblm3[0]),bytes.fromhex(input_prblm3[1]))
+# Problem 4
+key_4 = nacl.utils.random(nacl.secret.SecretBox.KEY_SIZE)
 
-print(input_prblm3[0])
-print(input_prblm3[1])
-print(input_xor)
+
+input_p4=inputs["problem4"]
+
+input_p4_1=input_p4[0].encode()
+input_p4_2=input_p4[1].encode()
+input_p4_3=input_p4[2].encode()
+
+encrypt_1=SecretBox(key_4).encrypt(input_p4_1, get_nonce()).ciphertext
+encrypt_2=SecretBox(key_4).encrypt(input_p4_1, get_nonce()).ciphertext
+encrypt_3=SecretBox(key_4).encrypt(input_p4_1, get_nonce()).ciphertext
+
+final_1 =encrypt_1.hex()
+final_2 =encrypt_2.hex()
+final_3 =encrypt_3.hex()
+
+print(final_1,"--", final_2,"--",final_3)
+outputs["problem4"] =final_1,final_2,final_3
+
 
 
 # Output
