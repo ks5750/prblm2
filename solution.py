@@ -81,7 +81,6 @@ final_1 =encrypt_1.hex()
 final_2 =encrypt_2.hex()
 final_3 =encrypt_3.hex()
 
-print(final_1,"--", final_2,"--",final_3)
 outputs["problem4"] =final_1,final_2,final_3
 
 
