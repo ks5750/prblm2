@@ -74,8 +74,8 @@ input_p4_2=input_p4[1].encode()
 input_p4_3=input_p4[2].encode()
 
 encrypt_1=SecretBox(key_4).encrypt(input_p4_1, get_nonce()).ciphertext
-encrypt_2=SecretBox(key_4).encrypt(input_p4_1, get_nonce()).ciphertext
-encrypt_3=SecretBox(key_4).encrypt(input_p4_1, get_nonce()).ciphertext
+encrypt_2=SecretBox(key_4).encrypt(input_p4_2, get_nonce()).ciphertext
+encrypt_3=SecretBox(key_4).encrypt(input_p4_3, get_nonce()).ciphertext
 
 final_1 =encrypt_1.hex()
 final_2 =encrypt_2.hex()
