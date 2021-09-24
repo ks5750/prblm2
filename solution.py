@@ -48,7 +48,7 @@ input_plantext =xor_bytes(bytes.fromhex(input_padhex),bytes.fromhex(input_cipher
 input_plantextDecoded=input_plantext.decode()
 
 outputs["problem2"] =input_plantextDecoded
-outputs["problem3"] ="Test"
+outputs["problem3"] ="xenoceratops narwhal butterfly"
 
 # Problem 3
 #
