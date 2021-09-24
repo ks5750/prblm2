@@ -64,7 +64,7 @@ outputs["problem3"] ="xenoceratops narwhal butterfly"
 
 
 # Problem 4
-key_4 = nacl.utils.random(nacl.secret.SecretBox.KEY_SIZE)
+key_4 = nacl.utils.random(32)
 
 
 input_p4=inputs["problem4"]
