@@ -10,12 +10,13 @@ import json
 import secrets
 import os
 
-
-#with open(sys.argv[1]) as json_data:
-#   inputs = json.load(json_data)
+# with open(sys.argv[1]) as json_data:
+#     inputs = json.load(json_data)
 inputs = json.load(sys.stdin)
 
 outputs = {}
+
+
 def xor_bytes(a, b):
     assert len(a) == len(b)
     output = bytearray(len(a))
@@ -23,17 +24,18 @@ def xor_bytes(a, b):
         output[i] = a[i] ^ b[i]
     return output
 
+
 def get_nonce():
-    ct=nacl.utils.random(24)
+    ct = nacl.utils.random(24)
     return ct
 
 
 # Problem 1
-input_asciistr=inputs["problem1"]
-input_bytes=input_asciistr.encode()
-input_asciistr_ln=len(input_bytes)
-input_OTP=secrets.token_bytes(input_asciistr_ln)
-input_cipher =xor_bytes(input_bytes,input_OTP)
+input_asciistr = inputs["problem1"]
+input_bytes = input_asciistr.encode()
+input_asciistr_ln = len(input_bytes)
+input_OTP = secrets.token_bytes(input_asciistr_ln)
+input_cipher = xor_bytes(input_bytes, input_OTP)
 
 outputs["problem1"] = {
     "pad": input_OTP.hex(),
@@ -42,49 +44,43 @@ outputs["problem1"] = {
 
 # Problem 2
 
-input_prblm2=inputs["problem2"]
-input_padhex=input_prblm2["pad"]
-input_cipherhex=input_prblm2["ciphertext"]
-input_plantext =xor_bytes(bytes.fromhex(input_padhex),bytes.fromhex(input_cipherhex))
-input_plantextDecoded=input_plantext.decode()
+input_prblm2 = inputs["problem2"]
+input_padhex = input_prblm2["pad"]
+input_cipherhex = input_prblm2["ciphertext"]
+input_plantext = xor_bytes(bytes.fromhex(input_padhex), bytes.fromhex(input_cipherhex))
+input_plantextDecoded = input_plantext.decode()
 
-outputs["problem2"] =input_plantextDecoded
+outputs["problem2"] = input_plantextDecoded
 
 # # Problem 3
-# #
-# input_prblm3 = inputs["problem3"]
-# plainText ="$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$".encode().hex()
 #
-# onetime_pad=xor_bytes(bytes.fromhex(plainText),bytes.fromhex(input_prblm3[0]))
-#
-# second_plainText=xor_bytes((onetime_pad),bytes.fromhex(input_prblm3[1]))
-#
-# outputs["problem3"] =second_plainText.decode()
+input_prblm3 = inputs["problem3"]
+
+charLen = len(input_prblm3[0])
+
+plaintext = ""
+for i in range(len(bytes.fromhex(input_prblm3[0]))):
+    plaintext = plaintext + "$"
+    # print(plaintext)
+
+plainTextHex = plaintext.encode().hex()
+
+onetime_pad = xor_bytes(bytes.fromhex(plainTextHex), bytes.fromhex(input_prblm3[0]))
+
+second_plainText = xor_bytes(onetime_pad, bytes.fromhex(input_prblm3[1]))
+
+outputs["problem3"] = second_plainText.decode()
+
 # # # Problem 4
-# # key_4 = nacl.utils.random(32)
-# #
-#
+# key_4 = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA".encode()
 # input_p4=inputs["problem4"]
-#
-# input_p4_1=input_p4[0].encode()
-# input_p4_2=input_p4[1].encode()
-# input_p4_3=input_p4[2].encode()
-#
-# counter_0=0
-# counter_1=1
-# counter_2=2
-#
-#
-#
-# encrypt_1=SecretBox(key_4).encrypt(input_p4_1, counter_0.to_bytes(24, "little")).ciphertext
-# encrypt_2=SecretBox(key_4).encrypt(input_p4_2, counter_1.to_bytes(24, "little")).ciphertext
-# encrypt_3=SecretBox(key_4).encrypt(input_p4_3, counter_2.to_bytes(24, "little")).ciphertext
-#
-# final_1 =encrypt_1.hex()
-# final_2 =encrypt_2.hex()
-# final_3 =encrypt_3.hex()
-#
-# outputs["problem4"] =final_1,final_2,final_3
+# cnt=0
+# for x in input_p4:
+#     newcnt=cnt.to_bytes(24, "little")
+#     encrypt_1 = SecretBox(key_4).encrypt(x, newcnt).ciphertext
+#     cnt += cnt
+#     final_1=encrypt_1.hex()
+#     outputs["problem4"]=final_1
 #
 
 
@@ -94,5 +90,3 @@ outputs["problem2"] =input_plantextDecoded
 # Either way works. This way adds some indentation and a trailing newline,
 # which makes things look nicer in the terminal.
 print(json.dumps(outputs, indent="  "))
-
-
