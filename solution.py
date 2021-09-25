@@ -11,13 +11,13 @@ import secrets
 import os
 
 
-#with open(sys.argv[1]) as json_data:
-#     inputs = json.load(json_data)
-inputs = json.load(sys.stdin)
+with open(sys.argv[1]) as json_data:
+     inputs = json.load(json_data)
+#inputs = json.load(sys.stdin)
 
 outputs = {}
 def xor_bytes(a, b):
-    assert len(a) == len(b)
+    #assert len(a) == len(b)
     output = bytearray(len(a))
     for i in range(len(a)):
         output[i] = a[i] ^ b[i]
@@ -40,7 +40,7 @@ outputs["problem1"] = {
     "ciphertext": input_cipher.hex(),
 }
 
-# Problem 2kl
+# Problem 2
 
 input_prblm2=inputs["problem2"]
 input_padhex=input_prblm2["pad"]
@@ -49,21 +49,17 @@ input_plantext =xor_bytes(bytes.fromhex(input_padhex),bytes.fromhex(input_cipher
 input_plantextDecoded=input_plantext.decode()
 
 outputs["problem2"] =input_plantextDecoded
-outputs["problem3"] ="xenoceratops narwhal butterfly"
 
 # Problem 3
 #
-# input_prblm3=inputs["problem3"]
-#
-# tempword="the".encode().hex()
-#
-# input_xor=xor_bytes(bytes.fromhex(input_prblm3[0]),bytes.fromhex(input_prblm3[1]))
-#
-# print(input_prblm3[0])
-# print(input_prblm3[1])
-# print(input_xor)
+input_prblm3=inputs["problem3"]
+plainText="$$$$$$$$$$$$$$$$$$$$$$$$".encode().hex()
 
+onetime_pad=xor_bytes(bytes.fromhex(plainText),bytes.fromhex(input_prblm3[0])).hex()
 
+second_plainText=xor_bytes(bytes.fromhex(onetime_pad),bytes.fromhex(input_prblm3[1]))
+
+outputs["problem3"] =second_plainText
 
 # Problem 4
 key_4 = nacl.utils.random(32)
