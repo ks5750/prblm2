@@ -50,21 +50,19 @@ input_plantextDecoded=input_plantext.decode()
 
 outputs["problem2"] =input_plantextDecoded
 
-# Problem 3
+# # Problem 3
+# #
+# input_prblm3 = inputs["problem3"]
+# plainText ="$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$".encode().hex()
 #
-input_prblm3 = inputs["problem3"]
-plainText ="$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$".encode().hex()
-
-
-onetime_pad=xor_bytes(bytes.fromhex(plainText),bytes.fromhex(input_prblm3[0]))
-
-second_plainText=xor_bytes((onetime_pad),bytes.fromhex(input_prblm3[1]))
-
-
-outputs["problem3"] =second_plainText.decode()
-# # Problem 4
-# key_4 = nacl.utils.random(32)
+# onetime_pad=xor_bytes(bytes.fromhex(plainText),bytes.fromhex(input_prblm3[0]))
 #
+# second_plainText=xor_bytes((onetime_pad),bytes.fromhex(input_prblm3[1]))
+#
+# outputs["problem3"] =second_plainText.decode()
+# # # Problem 4
+# # key_4 = nacl.utils.random(32)
+# #
 #
 # input_p4=inputs["problem4"]
 #
