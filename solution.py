@@ -61,32 +61,32 @@ second_plainText=xor_bytes(bytes.fromhex(onetime_pad),bytes.fromhex(input_prblm3
 
 outputs["problem3"] =second_plainText
 
-# Problem 4
-key_4 = nacl.utils.random(32)
-
-
-input_p4=inputs["problem4"]
-
-input_p4_1=input_p4[0].encode()
-input_p4_2=input_p4[1].encode()
-input_p4_3=input_p4[2].encode()
-
-counter_0=0
-counter_1=1
-counter_2=2
-
-
-
-encrypt_1=SecretBox(key_4).encrypt(input_p4_1, counter_0.to_bytes(24, "little")).ciphertext
-encrypt_2=SecretBox(key_4).encrypt(input_p4_2, counter_1.to_bytes(24, "little")).ciphertext
-encrypt_3=SecretBox(key_4).encrypt(input_p4_3, counter_2.to_bytes(24, "little")).ciphertext
-
-final_1 =encrypt_1.hex()
-final_2 =encrypt_2.hex()
-final_3 =encrypt_3.hex()
-
-outputs["problem4"] =final_1,final_2,final_3
-
+# # Problem 4
+# key_4 = nacl.utils.random(32)
+#
+#
+# input_p4=inputs["problem4"]
+#
+# input_p4_1=input_p4[0].encode()
+# input_p4_2=input_p4[1].encode()
+# input_p4_3=input_p4[2].encode()
+#
+# counter_0=0
+# counter_1=1
+# counter_2=2
+#
+#
+#
+# encrypt_1=SecretBox(key_4).encrypt(input_p4_1, counter_0.to_bytes(24, "little")).ciphertext
+# encrypt_2=SecretBox(key_4).encrypt(input_p4_2, counter_1.to_bytes(24, "little")).ciphertext
+# encrypt_3=SecretBox(key_4).encrypt(input_p4_3, counter_2.to_bytes(24, "little")).ciphertext
+#
+# final_1 =encrypt_1.hex()
+# final_2 =encrypt_2.hex()
+# final_3 =encrypt_3.hex()
+#
+# outputs["problem4"] =final_1,final_2,final_3
+#
 
 
 # Output
