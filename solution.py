@@ -10,7 +10,7 @@ import json
 import secrets
 import os
 
-# with open(sys.argv[1]) as json_data:
+#with open(sys.argv[1]) as json_data:
 #     inputs = json.load(json_data)
 inputs = json.load(sys.stdin)
 
@@ -72,16 +72,17 @@ second_plainText = xor_bytes(onetime_pad, bytes.fromhex(input_prblm3[1]))
 outputs["problem3"] = second_plainText.decode()
 
 # # # Problem 4
-# key_4 = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA".encode()
-# input_p4=inputs["problem4"]
-# cnt=0
-# for x in input_p4:
-#     newcnt=cnt.to_bytes(24, "little")
-#     encrypt_1 = SecretBox(key_4).encrypt(x, newcnt).ciphertext
-#     cnt += cnt
-#     final_1=encrypt_1.hex()
-#     outputs["problem4"]=final_1
-#
+key_4 = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA".encode()
+input_p4=inputs["problem4"]
+cnt=0
+final_1=[]
+for x in input_p4:
+    newcnt=cnt.to_bytes(24, "little")
+    encrypt_1 = SecretBox(key_4).encrypt(x.encode(), newcnt).ciphertext
+    final_1.append(encrypt_1.hex())
+    cnt += 1
+outputs["problem4"]=final_1
+
 
 
 # Output
