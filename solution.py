@@ -116,7 +116,6 @@ second_plainText_6 = xor_bytes(onetime_pad_6, bytes.fromhex(input_prblm6[1]))
 
 sliced=second_plainText_6[16:]
 
-print(sliced.decode())
 outputs["problem6"] = sliced.decode()
 
 
