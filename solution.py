@@ -56,8 +56,6 @@ outputs["problem2"] = input_plantextDecoded
 #
 input_prblm3 = inputs["problem3"]
 
-charLen = len(input_prblm3[0])
-
 plaintext = ""
 for i in range(len(bytes.fromhex(input_prblm3[0]))):
     plaintext = plaintext + "$"
@@ -72,7 +70,7 @@ second_plainText = xor_bytes(onetime_pad, bytes.fromhex(input_prblm3[1]))
 outputs["problem3"] = second_plainText.decode()
 
 # # # Problem 4
-key_4 = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA".encode()
+key_4 = ('A'*32).encode()
 input_p4=inputs["problem4"]
 cnt=0
 final_1=[]
@@ -84,7 +82,7 @@ for x in input_p4:
 outputs["problem4"]=final_1
 
 # # # Problem 5
-key_5 = "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB".encode()
+key_5 = ('B'*32).encode()
 input_p5=inputs["problem5"]
 cnt=0
 final_5=[]
@@ -100,8 +98,6 @@ outputs["problem5"]=final_5
 # # Problem 6
 
 input_prblm6 = inputs["problem6"]
-
-charLen = len(input_prblm6[0])
 
 plaintext_6 = ""
 for i in range(len(bytes.fromhex(input_prblm6[0]))):
