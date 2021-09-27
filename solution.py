@@ -70,30 +70,28 @@ second_plainText = xor_bytes(onetime_pad, bytes.fromhex(input_prblm3[1]))
 outputs["problem3"] = second_plainText.decode()
 
 # # # Problem 4
-key_4 = ('A'*32).encode()
-input_p4=inputs["problem4"]
-cnt=0
-final_1=[]
+key_4 = ('A' * 32).encode()
+input_p4 = inputs["problem4"]
+cnt = 0
+final_1 = []
 for x in input_p4:
-    newcnt=cnt.to_bytes(24, "little")
+    newcnt = cnt.to_bytes(24, "little")
     encrypt_1 = SecretBox(key_4).encrypt(x.encode(), newcnt).ciphertext
     final_1.append(encrypt_1.hex())
     cnt += 1
-outputs["problem4"]=final_1
+outputs["problem4"] = final_1
 
 # # # Problem 5
-key_5 = ('B'*32).encode()
-input_p5=inputs["problem5"]
-cnt=0
-final_5=[]
+key_5 = ('B' * 32).encode()
+input_p5 = inputs["problem5"]
+cnt = 0
+final_5 = []
 for x in input_p5:
-    newcnt_5=cnt.to_bytes(24, "little")
+    newcnt_5 = cnt.to_bytes(24, "little")
     encrypt_5 = SecretBox(key_5).decrypt(bytes.fromhex(x), newcnt_5)
     final_5.append(encrypt_5.decode())
     cnt += 1
-outputs["problem5"]=final_5
-
-
+outputs["problem5"] = final_5
 
 # # Problem 6
 
@@ -110,32 +108,29 @@ onetime_pad_6 = xor_bytes(bytes.fromhex(plainTextHex_6), bytes.fromhex(input_prb
 
 second_plainText_6 = xor_bytes(onetime_pad_6, bytes.fromhex(input_prblm6[1]))
 
-sliced=second_plainText_6[16:]
+sliced = second_plainText_6[16:]
 
 outputs["problem6"] = sliced.decode()
 
-
 # # # Problem 7
-key_7 = ('C'*32).encode()
-input_p7=inputs["problem7"]
+key_7 = ('C' * 32).encode()
+input_p7 = inputs["problem7"]
 
-final_7=[]
+final_7 = []
 for x in input_p7:
-    nonce_7=get_nonce()
+    nonce_7 = get_nonce()
     encrypt_7 = SecretBox(key_7).encrypt(x.encode(), nonce_7)
     final_7.append(encrypt_7.hex())
-outputs["problem7"]=final_7
+outputs["problem7"] = final_7
 
 # # # Problem 8
-input_p8=inputs["problem8"]
+input_p8 = inputs["problem8"]
 
-final_8=[]
+final_8 = []
 for x in input_p8:
     encrypt_8 = SecretBox(key_7).decrypt(bytes.fromhex(x))
     final_8.append(encrypt_8.decode())
-outputs["problem8"]=final_8
-
-
+outputs["problem8"] = final_8
 
 # Output
 #
