@@ -11,7 +11,7 @@ import secrets
 import os
 
 #with open(sys.argv[1]) as json_data:
-#     inputs = json.load(json_data)
+#    inputs = json.load(json_data)
 inputs = json.load(sys.stdin)
 
 outputs = {}
@@ -83,6 +83,17 @@ for x in input_p4:
     cnt += 1
 outputs["problem4"]=final_1
 
+# # # Problem 5
+key_5 = "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB".encode()
+input_p5=inputs["problem5"]
+cnt=0
+final_5=[]
+for x in input_p5:
+    newcnt_5=cnt.to_bytes(24, "little")
+    encrypt_5 = SecretBox(key_5).decrypt(bytes.fromhex(x), newcnt_5)
+    final_5.append(encrypt_5.decode())
+    cnt += 1
+outputs["problem5"]=final_5
 
 
 # Output
