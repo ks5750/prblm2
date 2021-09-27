@@ -10,9 +10,9 @@ import json
 import secrets
 import os
 
-#with open(sys.argv[1]) as json_data:
-#    inputs = json.load(json_data)
-inputs = json.load(sys.stdin)
+with open(sys.argv[1]) as json_data:
+   inputs = json.load(json_data)
+#inputs = json.load(sys.stdin)
 
 outputs = {}
 
@@ -94,6 +94,31 @@ for x in input_p5:
     final_5.append(encrypt_5.decode())
     cnt += 1
 outputs["problem5"]=final_5
+
+
+
+# # Problem 6
+
+input_prblm6 = inputs["problem6"]
+
+charLen = len(input_prblm6[0])
+
+plaintext_6 = ""
+for i in range(len(bytes.fromhex(input_prblm6[0]))):
+    plaintext_6 = plaintext_6 + "$"
+    # print(plaintext)
+
+plainTextHex_6 = plaintext_6.encode().hex()
+
+onetime_pad_6 = xor_bytes(bytes.fromhex(plainTextHex_6), bytes.fromhex(input_prblm6[0]))
+
+second_plainText_6 = xor_bytes(onetime_pad_6, bytes.fromhex(input_prblm6[1]))
+
+sliced=second_plainText_6[16:]
+
+print(sliced.decode())
+outputs["problem6"] = sliced.decode()
+
 
 
 # Output
