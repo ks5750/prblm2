@@ -130,6 +130,15 @@ for x in input_p7:
     final_7.append(encrypt_7.hex())
 outputs["problem7"]=final_7
 
+# # # Problem 8
+input_p8=inputs["problem8"]
+
+final_8=[]
+for x in input_p8:
+    encrypt_8 = SecretBox(key_7).decrypt(bytes.fromhex(x))
+    final_8.append(encrypt_8.decode())
+outputs["problem8"]=final_8
+
 
 
 # Output
