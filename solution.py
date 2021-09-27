@@ -119,6 +119,18 @@ sliced=second_plainText_6[16:]
 outputs["problem6"] = sliced.decode()
 
 
+# # # Problem 7
+key_7 = ('C'*32).encode()
+input_p7=inputs["problem7"]
+
+final_7=[]
+for x in input_p7:
+    nonce_7=get_nonce()
+    encrypt_7 = SecretBox(key_7).encrypt(x.encode(), nonce_7)
+    final_7.append(encrypt_7.hex())
+outputs["problem7"]=final_7
+
+
 
 # Output
 #
